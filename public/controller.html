@@ -5,7 +5,7 @@
         <title>click to change color</title>
         
     </head>
-    <body style="align-items: center">
+    <body onload="docLoad()" style="align-items: center">
         <!--<h1>Hold A,S,D to select a column</h1>
         <h1>Hold W,S,X to select a Row</h1>
         <h2>Use arrow keys to rotate up,down or left,right</h2>-->
@@ -158,6 +158,12 @@
                     socket.emit('pattern4');
                 }
             });
+
+            function docLoad(){
+                console.log("doc load");
+                socket.emit('load');
+            }
+            
         </script>
     </body>
 </html>

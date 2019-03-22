@@ -24,10 +24,18 @@ socketIO.on('connection',function(socket){
     socket.on('disconnect',function(){
         console.log(socket.id +' disconnected');
     });
-    socket.on('disconnect',function(){
-        console.log(socket.id +' disconnected');
-    });
-    //up events
+    
+    socket.on('load',function(){
+        console.log('doc loaded');
+       
+        x = 1;
+        for (i = 0; i <10; i++){
+            r = Math.floor(Math.random() * (6 - 1)) + 1;
+            socketIO.sockets.emit('rotate_row',{row: r, direction: x});
+            x*=-1;
+        }
+        //shuffel the rows everytime controller loads 
+    }); 
     
     //left events
     socket.on('R1left',function(){
