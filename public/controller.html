@@ -86,7 +86,10 @@
                   <td><input type="radio" name="pattern" value="4"  id="p4"></td>
               </tr>
           </table>
-          
+
+          <button id="userCtrl" type="button" value =0>enable user control</button>
+
+
         <script src='/socket.io/socket.io.js'></script>
         <script>
             //write some socket client code
@@ -157,6 +160,22 @@
                     console.log("pattern change 4");
                     socket.emit('pattern4');
                 }
+            });
+
+            document.querySelector("#userCtrl").addEventListener('click',function(){
+                console.log("user control status change");
+                btn = document.querySelector("#userCtrl"); 
+                if (btn.value == 0){
+                    document.querySelector("#userCtrl").innerHTML = "disable user control"
+                    btn.value = 1;
+                    socket.emit('userCTRL_ON');
+                }
+                else{
+                    document.querySelector("#userCtrl").innerHTML = "enable user control"
+                    btn.value = 0;
+                    socket.emit('userCTRL_OFF');   
+                }
+
             });
 
             function docLoad(){

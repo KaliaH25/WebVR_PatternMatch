@@ -79,6 +79,7 @@ socketIO.on('connection',function(socket){
         console.log("row5 left event");
         socketIO.sockets.emit('rotate_row',{row: 5, direction: -1});
     });
+    //pattern veiw change
     socket.on('pattern1',function(){
         console.log('change pattern: 1');
         socketIO.sockets.emit('change_pattern',{picNum: "1"});
@@ -94,7 +95,16 @@ socketIO.on('connection',function(socket){
     socket.on('pattern4',function(){
         console.log('change pattern: 4');
         socketIO.sockets.emit('change_pattern',{picNum: "4"});
-    });   
+    });  
+    //user control toggle
+    socket.on('userCTRL_ON',function(){
+        console.log('controls on');
+        socketIO.sockets.emit('userCTRL_Toggle',{value: true});
+    });  
+    socket.on('userCTRL_OFF',function(){
+        console.log('controls off');
+        socketIO.sockets.emit('userCTRL_Toggle',{value: false});
+    }); 
 });
     
 //start server

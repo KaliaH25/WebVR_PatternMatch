@@ -13,7 +13,7 @@
                 <img id="pattern_4" src="/images/pattern4.png"></img>
             </a-assets>
             <!-- Setting up camera and curser-->
-            <a-entity position ="0 0 0" camera look-controls wasd-controls>
+            <a-entity position ="0 0 0" camera look-controls>
                 <a-entity cursor ="fuse:true; fuseTimeOut:1000;rayOrigin:mouse;"
                     position="0 0 -1">                
                 </a-entity>
@@ -371,13 +371,14 @@
         </a-scene>    
         <script src='/socket.io/socket.io.js'></script>
         <script>
-            //write some socket client code
+            //socket client code
             let socket = io();
+            let userControls = false;
             //built in event
             socket.on('connect',function(data){
                 console.log('conneted!');
             });
-            
+            //rotate rows
             socket.on('rotate_row',function(data){
                 console.log('row: '+ data.row + " direction: " + data.direction);
                 let rowCubes = document.querySelectorAll(".R"+data.row);
@@ -392,9 +393,8 @@
                 })
                 updateClassName(rowCubes,cubeClasses,data.direction*-1); 
             });
-
-            function updateClassName(cubeList,classNameList,dir){
-                //updates the class name of the cubel based on its current rotation
+             //updates the class name of the cubel based on its current rotation
+            function updateClassName(cubeList,classNameList,dir){  
                 var i =0;
                 cubeList.forEach(function(cube){
                    // console.log('old: '+ cube.className);
@@ -412,7 +412,7 @@
                     i++;
                 })
             }
-
+            //changes pattern on top plane
             socket.on('change_pattern',function(data){
                 console.log(data.picNum);
              
@@ -420,8 +420,65 @@
                 let srcString = "src: #pattern_"+data.picNum;
                        
                 plane.setAttribute("material",srcString);
+                alert("look up for a new pattern reference");
             });
 
+            socket.on('userCTRL_Toggle', function(data){
+                userControls = data.value;
+                if (userControls){
+                    alert("Controls turned on!\n1,3 : Rotate Row 1\nQ,E : Rotate Row 2\nA,D : Rotate Row 3\nZ,C : Rotate Row 4\nalt,space : Rotate Row 5");
+                }
+                else{
+                    alert("controls turned off!")
+                }
+            });
+            //key down controls for competetive more 
+            document.onkeydown = function(e) {
+                if(userControls){
+                    switch (e.keyCode) {
+                    case 49:
+                        //1
+                        socket.emit('R1left');                    
+                        break;
+                    case 51:
+                        //3
+                        socket.emit('R1right'); 
+                        break;
+                    case 81:
+                        //Q
+                        socket.emit('R2left');
+                        break;
+                    case 69:
+                        //E
+                        socket.emit('R2right');
+                        break;
+                    case 65:
+                        //A
+                        socket.emit('R3left');                    
+                        break;
+                    case 68:
+                        //D
+                        socket.emit('R3right'); 
+                        break;
+                    case 90:
+                        //Z
+                        socket.emit('R4left');                    
+                        break;
+                    case 67:
+                        //C
+                        socket.emit('R4right'); 
+                        break;
+                    case 18:
+                        //alt
+                        socket.emit('R5left');                    
+                        break;
+                    case 32:
+                        //space
+                        socket.emit('R5right'); 
+                        break;
+                    } 
+                }      
+            };
             
         </script>
     </body>
