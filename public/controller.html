@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>click to change color</title>
+        
+    </head>
+    <body style="align-items: center">
+        <!--<h1>Hold A,S,D to select a column</h1>
+        <h1>Hold W,S,X to select a Row</h1>
+        <h2>Use arrow keys to rotate up,down or left,right</h2>-->
+        
+        <h1>Click the buttons to rotate the cube rows</h1>
+        <table style=" border:1px solid #dddddd">
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th> 
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td><button id="R1left" type="button">←</button></td>
+              <td></td>
+              <td>ROW 1</td>
+              <td></td>
+              <td><button id="R1right" type="button">→</button></td>
+            </tr>
+            <tr>
+              <td><button id="R2left" type="button" >←</button></td>
+              <td></td>
+              <td>ROW 2</td>
+              <td></td>
+              <td><button id="R2right" type="button">→</button></td>
+            </tr>
+            <tr>
+              <td><button id="R3left" type="button" >←</button></td>
+              <td></td>
+              <td>ROW 3</td>
+              <td></td>
+              <td><button id="R3right" type="button" >→</button></td>
+            </tr>
+            <tr>
+              <td><button id="R4left" type="button" >←</button></td>
+              <td></td>
+              <td>ROW 4</td>
+              <td></td>
+              <td><button id="R4right" type="button" >→</button></td>
+            </tr>
+            <tr>
+              <td><button id="R5left" type="button" >←</button></td>
+              <td></td>
+              <td>ROW 5</td>
+              <td></td>
+              <td><button id="R5right" type="button" >→</button></td>
+            </tr>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th> 
+              <th></th>
+              <th></th>
+            </tr>
+          </table>
+          <br>
+          
+        <script src='/socket.io/socket.io.js'></script>
+        <script>
+            //write some socket client code
+            let socket = io();
+            //built in event
+            socket.on('connect',function(data){
+                console.log('conneted!');
+            });
+            //listen for click events then send to socket server...
+
+            //left events
+            document.querySelector("#R1left").addEventListener('click',function(){
+                console.log("click R1left");
+                socket.emit('R1left');
+            });
+            document.querySelector("#R2left").addEventListener('click',function(){
+                console.log("click R2left");
+                socket.emit('R2left');
+            });
+            document.querySelector("#R3left").addEventListener('click',function(){
+                console.log("click R3left");
+                socket.emit('R3left');
+            });
+            document.querySelector("#R4left").addEventListener('click',function(){
+                console.log("click R4left");
+                socket.emit('R4left');
+            });
+            document.querySelector("#R5left").addEventListener('click',function(){
+                console.log("click R5left");
+                socket.emit('R5left');
+            });
+            //right events
+            document.querySelector("#R1right").addEventListener('click',function(){
+                console.log("click R1right");
+                socket.emit('R1right');
+            });
+            document.querySelector("#R2right").addEventListener('click',function(){
+                console.log("click R2right");
+                socket.emit('R2right');
+            });
+            document.querySelector("#R3right").addEventListener('click',function(){
+                console.log("click R3right");
+                socket.emit('R3right');
+            });
+            document.querySelector("#R4right").addEventListener('click',function(){
+                console.log("click R4right");
+                socket.emit('R4right');
+            });
+            document.querySelector("#R5right").addEventListener('click',function(){
+                console.log("click R5right");
+                socket.emit('R5right');
+            });
+        </script>
+    </body>
+</html>
