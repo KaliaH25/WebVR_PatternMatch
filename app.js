@@ -70,7 +70,23 @@ socketIO.on('connection',function(socket){
     socket.on('R5right',function(){
         console.log("row5 left event");
         socketIO.sockets.emit('rotate_row',{row: 5, direction: -1});
-    });     
+    });
+    socket.on('pattern1',function(){
+        console.log('change pattern: 1');
+        socketIO.sockets.emit('change_pattern',{picNum: "1"});
+    }); 
+    socket.on('pattern2',function(){
+        console.log('change pattern: 2');
+        socketIO.sockets.emit('change_pattern',{picNum: "2"});
+    });  
+    socket.on('pattern3',function(){
+        console.log('change pattern: 3');
+        socketIO.sockets.emit('change_pattern',{picNum: "3"});
+    });        
+    socket.on('pattern4',function(){
+        console.log('change pattern: 4');
+        socketIO.sockets.emit('change_pattern',{picNum: "4"});
+    });   
 });
     
 //start server

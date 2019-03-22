@@ -6,6 +6,12 @@
     </head>
     <body>
         <a-scene shadow="type:basic;">
+            <a-assets timeout="3000">
+                <img id="pattern_1" src="/images/pattern1.png"></img>
+                <img id="pattern_2" src="/images/pattern2.png"></img>
+                <img id="pattern_3" src="/images/pattern3.png"></img>
+                <img id="pattern_4" src="/images/pattern4.png"></img>
+            </a-assets>
             <!-- Setting up camera and curser-->
             <a-entity position ="0 0 0" camera look-controls wasd-controls>
                 <a-entity cursor ="fuse:true; fuseTimeOut:1000;rayOrigin:mouse;"
@@ -347,6 +353,11 @@
             <a-entity class="F4 C10 R5">
                 <a-plane  id="cubel15" position="-3 -2 2" width = "0.95" height="0.95" rotation = "0 90 0"  color="#9bd7d1" ></a-plane>
             </a-entity>
+
+
+            
+            <a-plane id = "imgPrev" position = "0 2.5 0" width = "2" height = "2" material="src: #pattern_1" rotation = "90 0 0" ></a-plane>
+            
                   
             <a-sky color = "#000000"></a-sky> 
         </a-scene>    
@@ -372,10 +383,7 @@
                     console.log(cubeClasses[i]);
                     i++;
                 })
-                //cubeClasses.sort();
-
                 updateClassName(rowCubes,cubeClasses,data.direction*-1); 
-               
             });
 
             function updateClassName(cubeList,classNameList,dir){
@@ -397,7 +405,16 @@
                     i++;
                 })
             }
-           
+
+            socket.on('change_pattern',function(data){
+                console.log(data.picNum);
+             
+                let plane = document.querySelector("#imgPrev");
+                let srcString = "src: #pattern_"+data.picNum;
+                       
+                plane.setAttribute("material",srcString);
+            });
+
             
         </script>
     </body>

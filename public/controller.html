@@ -63,6 +63,29 @@
             </tr>
           </table>
           <br>
+          <h2>Pick a pattern to solve, tell friend to look up to see full pattern</h2>
+          <table>
+              <tr>
+                  <th><button class="pattern_btn"> click to change pattern</button></th>
+                  <th></th>
+              </tr>
+              <tr>
+                  <td><img src="/images/pattern1.png" style="width:50px; height:50px;"></img></td>
+                  <td><input type="radio" name="pattern" value="1"id="p1"></td>
+              </tr>
+               <tr>
+                  <td><img  src="/images/pattern2.png" style="width:50px; height:50px;"></img></td>
+                  <td><input type="radio" name="pattern" value="2" id="p2"></td>
+              </tr>
+               <tr>
+                  <td><img src="/images/pattern3.png"  style="width:50px; height:50px;"></img></td>
+                  <td><input type="radio" name="pattern" value="3" id="p3"></td>
+              </tr>
+               <tr>
+                  <td><img src="/images/pattern4.png" style="width:50px; height:50px;"></img></td>
+                  <td><input type="radio" name="pattern" value="4"  id="p4"></td>
+              </tr>
+          </table>
           
         <script src='/socket.io/socket.io.js'></script>
         <script>
@@ -115,6 +138,25 @@
             document.querySelector("#R5right").addEventListener('click',function(){
                 console.log("click R5right");
                 socket.emit('R5right');
+            });
+            document.querySelector(".pattern_btn").addEventListener('click',function(){
+                if(document.querySelector("#p1").checked == true){
+                    console.log("pattern change 1");
+                    socket.emit('pattern1');
+                }
+                    
+                else if(document.querySelector("#p2").checked == true){
+                    console.log("pattern change 2");
+                    socket.emit('pattern2');
+                }
+                else if(document.querySelector("#p3").checked == true){
+                    console.log("pattern change 3");
+                    socket.emit('pattern3');
+                }
+                else if(document.querySelector("#p4").checked == true){
+                    console.log("pattern change 4");
+                    socket.emit('pattern4');
+                }
             });
         </script>
     </body>
